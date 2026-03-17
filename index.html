@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mybook — 图书收藏的私人馆藏</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,600&family=Jost:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="texture-paris texture-noise-overlay">
+  <nav class="side-nav" aria-label="Primary">
+    <a class="nav-logo" href="#top" aria-label="mybook">
+      <svg aria-hidden="true"><use href="assets/icons.svg#logo-mark"></use></svg>
+    </a>
+    <div class="nav-links">
+      <a href="#hero" data-section="hero" class="active">Archive</a>
+      <a href="#features" data-section="features">Collection</a>
+      <a href="#testimonials" data-section="testimonials">Readers</a>
+    </div>
+    <div class="side-progress"><span></span></div>
+    <a href="#start" class="nav-cta" data-section="start">Begin</a>
+  </nav>
+
+  <main id="top">
+    <style>
+      .hero-c {
+        position: relative;
+        height: var(--section-h);
+        min-height: 700px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--bg);
+        text-align: center;
+        overflow: hidden;
+      }
+
+      .hero-c::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 50%; transform: translateX(-50%);
+        width: 60vw; height: 60vh;
+        background: radial-gradient(ellipse at top, var(--accent-soft) 0%, transparent 70%);
+        pointer-events: none;
+      }
+
+      .hero-c__inner {
+        position: relative;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 20px;
+        gap: 1.5rem;
+      }
+
+      .hero-c__eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        font-family: var(--font-body);
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 1rem;
+      }
+
+      .hero-c__rule {
+        width: 40px;
+        height: 1px;
+        background-color: var(--accent);
+      }
+
+      .hero-c__title {
+        font-family: var(--font-display);
+        font-size: clamp(2.8rem, 7vw, 7rem);
+        font-weight: 400;
+        line-height: 1.02;
+        color: var(--ink);
+        margin-bottom: 0.5rem;
+        max-width: 840px;
+      }
+
+      .hero-c__title i {
+        font-style: italic;
+        color: var(--ink-muted);
+        font-family: var(--font-accent);
+      }
+
+      .hero-c__desc {
+        font-size: clamp(1rem, 1.4vw, 1.2rem);
+        color: var(--ink-muted);
+        line-height: 1.7;
+        max-width: 44ch;
+        margin-bottom: 1rem;
+      }
+
+      .hero-c__actions {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .btn-c-primary, .btn-c-ghost {
+        padding: 0.9rem 2.2rem;
+        border-radius: 100px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .btn-c-primary {
+        background: var(--ink);
+        color: var(--bg);
+      }
+      .btn-c-primary:hover {
+        box-shadow: 0 0 20px var(--accent-soft);
+        background: var(--accent);
+        color: var(--bg);
+      }
+
+      .btn-c-ghost {
+        background: transparent;
+        color: var(--ink);
+        border: 1px solid rgba(26,22,18,0.25);
+      }
+      .btn-c-ghost:hover {
+        border-color: var(--ink);
+      }
+
+      .hero-c__visual {
+        position: absolute;
+        bottom: -5%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100vw;
+        height: auto;
+        opacity: 0.08;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .hero-c__glow {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse at 50% 40%, rgba(181,69,27,0.08) 0%, transparent 60%);
+        opacity: 0.8;
+        pointer-events: none;
+        z-index: 0;
+      }
+    </style>
+
+    <section class="hero-c clip-round-bottom" id="hero">
+      <div class="hero-c__glow"></div>
+      <div class="hero-c__inner">
+        <div class="hero-c__eyebrow js-hero-subtitle">
+          <span class="hero-c__rule"></span>
+          <span>MYBOOK ARCHIVE</span>
+          <span class="hero-c__rule"></span>
+        </div>
+
+        <h1 class="hero-c__title js-hero-title line-reveal">
+          <span class="line-wrap"><span class="line-inner">把你的藏书</span></span>
+          <span class="line-wrap"><span class="line-inner">写成一部 <i>可读的传记</i></span></span>
+        </h1>
+
+        <p class="hero-c__desc js-hero-subtitle">mybook 把每一次购入、借阅、标注与重读，沉淀为一条温柔而清晰的馆藏脉络。你的书架，从此有故事。</p>
+
+        <div class="hero-c__actions js-hero-cta">
+          <button class="btn-c-primary">开始整理藏书</button>
+          <button class="btn-c-ghost">浏览样例书架</button>
+        </div>
+      </div>
+
+      <svg class="hero-c__visual js-hero-visual" viewBox="0 0 1000 300" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,150 L1000,150" stroke="var(--ink)" stroke-width="1" />
+        <path d="M500,0 L500,300" stroke="var(--ink)" stroke-width="1" />
+        <circle cx="500" cy="150" r="110" fill="none" stroke="var(--ink)" stroke-width="1" />
+      </svg>
+    </section>
+
+    <style>
+      .variant-b-section {
+        position: relative;
+        background: var(--bg);
+        padding-bottom: 10vh;
+      }
+
+      .b-intro {
+        text-align: center;
+        padding: 12vh 5vw 4vh;
+      }
+
+      .b-intro h2 {
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 4vw, 4rem);
+        font-weight: 600;
+        margin-bottom: 1rem;
+      }
+
+      .b-intro p {
+        color: var(--ink-muted);
+        font-size: clamp(1rem, 1.4vw, 1.2rem);
+        max-width: 50ch;
+        margin: 0 auto;
+      }
+
+      .b-showcase-block {
+        position: relative;
+        padding: 15vh 5vw;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10vh;
+        align-items: center;
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 1s ease, transform 1s ease;
+      }
+
+      .b-showcase-block.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (min-width: 992px) {
+        .b-showcase-block {
+          grid-template-columns: 1fr 1fr;
+          gap: 8vw;
+          padding: 16vh 5vw;
+        }
+      }
+
+      .b-showcase-block:nth-child(odd) {
+        background-color: var(--bg-surface);
+        clip-path: polygon(0 0, 100% 4vw, 100% 100%, 0 calc(100% - 4vw));
+        margin-top: -4vw;
+        padding-top: calc(15vh + 4vw);
+        padding-bottom: calc(15vh + 4vw);
+        z-index: 2;
+      }
+
+      .b-showcase-block:nth-child(even) {
+        background-color: var(--bg);
+        z-index: 1;
+      }
+
+      .b-showcase-block:first-child {
+        margin-top: 0;
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 4vw));
+      }
+
+      @media (min-width: 992px) {
+        .b-showcase-block:nth-child(even) .b-content {
+          order: 2;
+        }
+        .b-showcase-block:nth-child(even) .b-visual {
+          order: 1;
+        }
+      }
+
+      .b-content {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .b-eyebrow {
+        font-family: var(--font-body);
+        color: var(--accent);
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        font-size: 0.8rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        display: inline-block;
+        padding: 0.35rem 0.9rem;
+        background: var(--accent-soft);
+        border-radius: 100px;
+      }
+
+      .b-headline {
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 4vw, 4rem);
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+      }
+
+      .b-body {
+        color: var(--ink-muted);
+        font-size: clamp(1rem, 1.4vw, 1.2rem);
+        margin-bottom: 2.5rem;
+      }
+
+      .b-link {
+        color: var(--ink);
+        text-decoration: none;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        border-bottom: 1px solid var(--accent);
+        padding-bottom: 0.25rem;
+        transition: color 0.3s ease;
+      }
+
+      .b-link:hover {
+        color: var(--accent);
+      }
+
+      .b-visual {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+      }
+
+      .b-visual svg {
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+      }
+
+      .b-svg-spin { animation: spin 20s linear infinite; transform-origin: center; }
+      .b-svg-float { animation: float 6s ease-in-out infinite; }
+      .b-svg-pulse { animation: pulse 4s ease-in-out infinite; }
+
+      @keyframes spin { 100% { transform: rotate(360deg); } }
+      @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+      @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.05); opacity: 1; } }
+    </style>
+
+    <section class="variant-b-section clip-diagonal-br" id="features">
+      <div class="b-intro">
+        <h2 class="line-reveal">
+          <span class="line-wrap"><span class="line-inner">把收藏变成馆藏</span></span>
+        </h2>
+        <p>从一册到一千册，mybook 让每一本书的身份、位置与故事都能被精准安放。</p>
+      </div>
+
+      <div class="b-showcase-block js-showcase-item">
+        <div class="b-content">
+          <span class="b-eyebrow">入库</span>
+          <h3 class="b-headline">ISBN 一扫，版本落位</h3>
+          <p class="b-body">扫码或输入 ISBN，自动补全作者、版次、封面与分类。你只需确认，余下交给 mybook。</p>
+          <a href="#start" class="b-link">试试快速录入 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+        <div class="b-visual">
+          <svg viewBox="0 0 400 400">
+            <g class="b-svg-spin">
+              <circle cx="200" cy="200" r="160" fill="none" stroke="var(--accent)" stroke-width="1" stroke-dasharray="10 20" opacity="0.5"/>
+              <circle cx="200" cy="200" r="120" fill="none" stroke="var(--ink)" stroke-width="2" stroke-dasharray="40 10"/>
+              <circle cx="200" cy="200" r="80" fill="none" stroke="var(--accent)" stroke-width="3" stroke-dasharray="15 30"/>
+            </g>
+            <circle cx="200" cy="200" r="18" fill="var(--accent)" class="b-svg-pulse"/>
+            <path d="M200 40 L200 120 M200 280 L200 360 M40 200 L120 200 M280 200 L360 200" stroke="var(--ink)" stroke-width="1" opacity="0.3"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="b-showcase-block js-showcase-item">
+        <div class="b-content">
+          <span class="b-eyebrow">陈列</span>
+          <h3 class="b-headline">书架像展览一样被排列</h3>
+          <p class="b-body">按主题、年份、出版社或颜色重排馆藏，私密与公开展架一键切换。</p>
+          <a href="#start" class="b-link">查看展架布局 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+        <div class="b-visual">
+          <svg viewBox="0 0 400 400">
+            <g class="b-svg-float">
+              <rect x="90" y="90" width="220" height="220" fill="var(--bg-surface)" stroke="var(--ink)" stroke-width="2" transform="rotate(45 200 200)"/>
+              <rect x="120" y="120" width="160" height="160" fill="none" stroke="var(--accent)" stroke-width="2" transform="rotate(12 200 200)"/>
+              <rect x="145" y="145" width="110" height="110" fill="var(--accent-soft)" stroke="var(--ink)" stroke-width="1" transform="rotate(-12 200 200)"/>
+            </g>
+            <line x1="50" y1="200" x2="350" y2="200" stroke="var(--accent)" stroke-width="1" stroke-dasharray="5 5" class="b-svg-spin"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="b-showcase-block js-showcase-item">
+        <div class="b-content">
+          <span class="b-eyebrow">轨迹</span>
+          <h3 class="b-headline">阅读标记与故事线</h3>
+          <p class="b-body">记录购入、借阅、笔记与重读，形成你的阅读年表与私人批注。</p>
+          <a href="#start" class="b-link">创建阅读年表 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+        <div class="b-visual">
+          <svg viewBox="0 0 400 400">
+            <g class="b-svg-pulse">
+              <path d="M 50 200 Q 125 100 200 200 T 350 200" fill="none" stroke="var(--accent)" stroke-width="4"/>
+              <path d="M 50 200 Q 125 250 200 200 T 350 200" fill="none" stroke="var(--ink)" stroke-width="1" opacity="0.6"/>
+              <path d="M 50 200 Q 125 50 200 200 T 350 200" fill="none" stroke="var(--ink)" stroke-width="1" opacity="0.2"/>
+              <circle cx="200" cy="200" r="8" fill="var(--bg)" stroke="var(--accent)" stroke-width="3"/>
+            </g>
+            <g opacity="0.2">
+              <line x1="100" y1="50" x2="100" y2="350" stroke="var(--ink)" stroke-width="1"/>
+              <line x1="200" y1="50" x2="200" y2="350" stroke="var(--ink)" stroke-width="1"/>
+              <line x1="300" y1="50" x2="300" y2="350" stroke="var(--ink)" stroke-width="1"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <style>
+      .testimonials-header {
+        margin-bottom: 4rem;
+      }
+
+      .testimonials-header h2 {
+        font-size: clamp(2rem, 4vw, 4rem);
+        max-width: 600px;
+      }
+
+      .bento-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        grid-auto-flow: dense;
+      }
+
+      @media (min-width: 768px) {
+        .bento-grid { grid-template-columns: repeat(2, 1fr); }
+      }
+
+      @media (min-width: 1024px) {
+        .bento-grid { grid-template-columns: repeat(4, 1fr); }
+      }
+
+      .testimonial-card {
+        background: var(--bg-surface);
+        border: 1px solid rgba(26,22,18,0.12);
+        border-radius: var(--radius-lg);
+        padding: 2.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: border-color 0.3s;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .testimonial-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: radial-gradient(800px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(181,69,27,0.08), transparent 40%);
+        opacity: 0;
+        transition: opacity 0.5s;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .testimonial-card:hover::before { opacity: 1; }
+      .testimonial-card:hover { border-color: rgba(181,69,27,0.3); }
+
+      .testimonial-content { position: relative; z-index: 1; }
+
+      @media (min-width: 1024px) {
+        .tc-1 { grid-column: span 2; }
+        .tc-2 { grid-row: span 2; display: flex; flex-direction: column; }
+        .tc-3 { grid-column: span 1; }
+        .tc-4 { grid-column: span 1; }
+        .tc-featured { grid-column: span 2; }
+      }
+
+      .quote-mark {
+        position: absolute;
+        top: -1rem;
+        left: -1rem;
+        font-family: var(--font-display);
+        font-size: clamp(4rem, 8vw, 6rem);
+        line-height: 1;
+        color: rgba(26,22,18,0.08);
+        z-index: 0;
+        opacity: 0.7;
+      }
+
+      .pull-quote {
+        font-family: var(--font-accent);
+        font-style: italic;
+        font-size: clamp(1.1rem, 1.5vw, 1.4rem);
+        font-weight: 500;
+        line-height: 1.4;
+        margin-bottom: 2rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .tc-2 .pull-quote { font-size: clamp(1.3rem, 2vw, 1.8rem); margin-top: auto; margin-bottom: auto; }
+
+      .testimonial-card.featured {
+        background: var(--accent);
+        color: var(--bg);
+        border: none;
+      }
+
+      .testimonial-card.featured .quote-mark { color: rgba(242,236,224,0.2); }
+      .testimonial-card.featured .pull-quote { font-size: clamp(1.5rem, 2.5vw, 2rem); font-weight: 600; letter-spacing: -0.02em; }
+      .testimonial-card.featured .text-muted { color: rgba(242,236,224,0.7); }
+
+      .attribution {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .avatar {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: rgba(26,22,18,0.08);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-body);
+        font-weight: 600;
+        font-size: 1rem;
+        color: var(--ink-muted);
+      }
+
+      .testimonial-card.featured .avatar { background: rgba(242,236,224,0.25); color: var(--bg); }
+
+      .author-meta { display: flex; flex-direction: column; }
+      .author-name { font-weight: 600; font-size: 1rem; }
+      .author-company { font-size: 0.875rem; }
+    </style>
+
+    <section class="section-testimonials section-dissolve" id="testimonials">
+      <div class="container">
+        <div class="testimonials-header">
+          <h2 class="text-display line-reveal">
+            <span class="line-wrap"><span class="line-inner">馆友们如何描述他们的书架</span></span>
+          </h2>
+        </div>
+
+        <div class="bento-grid" id="testimonial-grid">
+          <div class="testimonial-card tc-1 js-testimonial">
+            <div class="quote-mark">"</div>
+            <div class="testimonial-content">
+              <p class="pull-quote">“我终于能把不同版本的《红楼梦》分开展示，每一本的来源都清清楚楚。”</p>
+              <div class="attribution">
+                <div class="avatar">WL</div>
+                <div class="author-meta">
+                  <span class="author-name">王琳</span>
+                  <span class="author-company text-muted">版本控收藏者</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card tc-2 js-testimonial">
+            <div class="quote-mark">"</div>
+            <div class="testimonial-content">
+              <p class="pull-quote">“借给朋友的书再也不会忘记是谁拿走了，借阅记录像一条时间线。”</p>
+              <div class="attribution">
+                <div class="avatar">FT</div>
+                <div class="author-meta">
+                  <span class="author-name">方桐</span>
+                  <span class="author-company text-muted">社区读书会发起人</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card tc-3 js-testimonial">
+            <div class="quote-mark">"</div>
+            <div class="testimonial-content">
+              <p class="pull-quote">“书架像一个策展页面，想公开时公开，想私藏时私藏。”</p>
+              <div class="attribution">
+                <div class="avatar">JY</div>
+                <div class="author-meta">
+                  <span class="author-name">纪屿</span>
+                  <span class="author-company text-muted">独立设计师</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card tc-4 js-testimonial">
+            <div class="quote-mark">"</div>
+            <div class="testimonial-content">
+              <p class="pull-quote">“标签和笔记功能很克制，但刚好够用。”</p>
+              <div class="attribution">
+                <div class="avatar">HC</div>
+                <div class="author-meta">
+                  <span class="author-name">韩澈</span>
+                  <span class="author-company text-muted">纸书重度读者</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card featured tc-featured js-testimonial">
+            <div class="quote-mark">"</div>
+            <div class="testimonial-content">
+              <p class="pull-quote">“过去只是‘堆’，现在是一座安静的馆。每一本书都回到了它应在的位置。”</p>
+              <div class="attribution">
+                <div class="avatar">LM</div>
+                <div class="author-meta">
+                  <span class="author-name">林沐</span>
+                  <span class="author-company text-muted">家庭藏书整理师</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <style>
+      .section-cta {
+        padding: 10rem 2rem 8rem;
+        clip-path: polygon(0 8vw, 100% 0, 100% 100%, 0 100%);
+        background: var(--bg-surface);
+        margin-top: -8vw;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .cta-glow {
+        position: absolute;
+        top: 50%;
+        left: 20%;
+        width: 80vw;
+        height: 80vw;
+        background: radial-gradient(circle, rgba(181,69,27,0.15) 0%, rgba(181,69,27,0) 70%);
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .cta-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 4rem;
+        align-items: center;
+      }
+
+      @media (min-width: 992px) {
+        .cta-container {
+          grid-template-columns: 1fr 1fr;
+          gap: 6rem;
+        }
+      }
+
+      .cta-text-wrap { position: relative; }
+
+      .cta-headline {
+        font-size: clamp(2.6rem, 6vw, 5.5rem);
+        margin-bottom: 1.5rem;
+        position: relative;
+        z-index: 2;
+        font-family: var(--font-display);
+      }
+
+      .cta-headline span {
+        display: block;
+      }
+
+      .cta-headline .hl-accent {
+        color: var(--accent);
+        font-style: italic;
+        font-weight: 600;
+      }
+
+      .cta-subtext {
+        font-size: clamp(1rem, 1.4vw, 1.2rem);
+        color: var(--ink-muted);
+        max-width: 480px;
+        margin-bottom: 0;
+        position: relative;
+        z-index: 2;
+      }
+
+      .cta-arrow {
+        position: absolute;
+        right: -100px;
+        bottom: -50px;
+        width: 200px;
+        height: 200px;
+        stroke: var(--accent);
+        fill: none;
+        stroke-width: 2;
+        stroke-linecap: round;
+        opacity: 0.3;
+        pointer-events: none;
+        display: none;
+      }
+
+      @media (min-width: 992px) {
+        .cta-arrow { display: block; }
+      }
+
+      .cta-actions-wrap {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        align-items: flex-start;
+        position: relative;
+        z-index: 2;
+      }
+
+      .cta-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+      }
+
+      @media (min-width: 576px) {
+        .cta-actions {
+          flex-direction: row;
+          align-items: center;
+          width: auto;
+        }
+      }
+
+      .btn-magnetic {
+        position: relative;
+        display: inline-flex;
+        padding: 1.15rem 2.8rem;
+        font-size: 1.1rem;
+      }
+
+      .btn-ghost {
+        color: var(--ink-muted);
+        text-decoration: none;
+        font-weight: 500;
+        position: relative;
+        transition: color 0.3s;
+      }
+
+      .btn-ghost::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: var(--ink-muted);
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.3s ease;
+      }
+
+      .btn-ghost:hover { color: var(--ink); }
+      .btn-ghost:hover::after {
+        transform: scaleX(1);
+        transform-origin: left;
+        background: var(--ink);
+      }
+    </style>
+
+    <section class="section-cta js-cta-section" id="start">
+      <div class="cta-glow"></div>
+      <div class="container">
+        <div class="cta-container">
+          <div class="cta-text-wrap">
+            <h2 class="cta-headline line-reveal">
+              <span class="line-wrap"><span class="line-inner">现在开始整理</span></span>
+              <span class="line-wrap"><span class="line-inner"><span class="hl-accent">你的私人馆藏</span></span></span>
+            </h2>
+            <p class="cta-subtext">从十本到千本，只需几分钟就能建立你的第一座书架。</p>
+            <svg class="cta-arrow" viewBox="0 0 200 200">
+              <path d="M 20,20 C 100,20 180,80 160,160" />
+              <path d="M 120,160 L 160,160 L 160,120" />
+            </svg>
+          </div>
+
+          <div class="cta-actions-wrap">
+            <div class="cta-actions">
+              <button class="btn btn-primary btn-magnetic js-magnetic">建立我的书架</button>
+              <a href="#features" class="btn-ghost">先看看功能</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
